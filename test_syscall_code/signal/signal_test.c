@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 void handler(int sig) {
-    write(STDOUT_FILENO, "Signal received!\n", 17);
+    printf("Signal %d received!\n", sig);
 }
 
 int main() {
@@ -23,7 +23,8 @@ int main() {
     // block SIGUSR1
     sigprocmask(SIG_BLOCK, &newset, &oldset); 
     printf("SIGUSR1 blocked. Try sending signal now...\n");
-    raise(10);
+    raise(SIGUSR1);
+    raise(SIGUSR1);
     sleep(1);
 
     // unblock and wait 
